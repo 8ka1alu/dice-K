@@ -147,9 +147,9 @@ async def on_message(message):
             else:
                 omokuji = "大凶"    
             embed.add_field(name="[運勢] ", value=omokuji, inline=False)
-            if omokuji = "超大吉！！おみくじvip獲得！！":
+            if omokuji == "超大吉！！おみくじvip獲得！！":
                 embed.add_field(name="おめでとう🎉", value="<@&613342519438344193>に当たった事を伝えてください。", inline=False)
-            if omokuji = "大凶" or omokuji = "大吉":
+            if omokuji == "大凶" or omokuji = "大吉":
                 embed.add_field(name="Normal特典獲得！！", value="<@&613342519438344193>に当たった事を伝えてください。", inline=False)
             await message.channel.send(embed=embed)
             #client.get_channel(CHANNEL_ID3)
