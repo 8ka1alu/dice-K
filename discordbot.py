@@ -93,9 +93,11 @@ async def on_message(message):
                                   color=0x2ECC69)
             embed.set_thumbnail(url=message.author.avatar_url)
             prob = random.random()
+            print(prob)
             if message.author.id in omikuji_vip: 
                 vipwari = 2
                 prob = prob/vipwari
+            print(prob)
             if prob < 0.01:
                 omokuji = "大吉"
             elif prob < 0.1:
