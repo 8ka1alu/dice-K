@@ -87,7 +87,7 @@ async def on_message(message):
     if message.author.id == my_bot_id:
         return
     if message.content == "おみくじviper":
-        embed = discord.Embed(title="おみくじVIPER", description=None,color=0x2ECC69)
+        embed = discord.Embed(title="**おみくじVIPER**", description=None,color=0x2ECC69)
         counts = 0
         for v in omikuji_vip:
             counts += 1
