@@ -119,8 +119,7 @@ async def on_message(message):
             elif prob < 0.99:
                 omokuji = "小凶"
             else:
-                omokuji = "大凶"
-            
+                omokuji = "大凶"    
             embed.add_field(name="[運勢] ", value=omokuji, inline=False)
             await message.channel.send(embed=embed)
             #client.get_channel(CHANNEL_ID3)
