@@ -35,6 +35,8 @@ discord_py_ver = '3.7.3'
 ssr_tuti = 636400089396543526
 ssr_ch = 638239968140984330
 
+omikuji_vip = ["459936557432963103","0"]
+
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
@@ -90,25 +92,37 @@ async def on_message(message):
             embed = discord.Embed(title="おみくじ", description=f"{message.author.mention}さんの今日の運勢は！",
                                   color=0x2ECC69)
             embed.set_thumbnail(url=message.author.avatar_url)
-            embed.add_field(name="[運勢] ", value=random.choice(('大吉', '中吉', '小吉', '吉', '半吉', '末吉', '末小吉', '凶', '小凶', '半凶', '末凶', '大凶')), inline=False)
+            prob = random.random()
+            if message.author.id in omikuji_vip: 
+                vipwari = 2
+                prob = prob/vipwari
+            if prob < 0.01:
+                omokuji = "大吉"
+            elif prob < 0.1:
+                omokuji = "中吉"
+            elif prob < 0.2:
+                omokuji = "小吉"
+            elif prob < 0.3:
+                omokuji = "吉"
+            elif prob < 0.4:
+                omokuji = "半吉"
+            elif prob < 0.5:
+                omokuji = "末吉"
+            elif prob < 0.6:
+                omokuji = "末小吉"
+            elif prob < 0.7:
+                omokuji = "末凶"
+            elif prob < 0.8:
+                omokuji = "凶"
+            elif prob < 0.99:
+                omokuji = "小凶"
+            else:
+                omokuji = "大凶"
+            
+            embed.add_field(name="[運勢] ", value=omokuji, inline=False)
             await message.channel.send(embed=embed)
             #client.get_channel(CHANNEL_ID3)
         
-    if message.content == 'ratk':
-        await message.channel.send('..atk')
-    if message.content == 'rin':
-        await message.channel.send('..in')
-    if message.author.id == ssr_tuti:
-        await client.get_channel(ssr_ch).send('..i in')
-    if message.content == 'rmycoin':
-        await message.channel.send('..mycoin')
-    if message.content == 'rgatya':
-        await message.channel.send('..gatya 100')
-    if message.content == 'rlogin':
-        await message.channel.send('..login')
-    if message.content == 'rst':
-        await message.channel.send('..st')
-
     if message.content == 'ヘルプ':
         page_count = 0 #ヘルプの現在表示しているページ数
         page_content_list = [">>> **リリナコマンド一覧(ページ1)**\n\n**何時？**：今の時間を教えてくれます！(何時何分何秒)\n**何日？**：何日か教えてくれます！(何月何日)\n\n➡絵文字を押すと次のページへ",
