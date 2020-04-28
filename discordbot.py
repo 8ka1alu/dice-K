@@ -36,7 +36,7 @@ ssr_tuti = 636400089396543526
 ssr_ch = 638239968140984330
 
 omikuji_vip = [459936557432963103,436078064292855818,493343156864155668]
-omikuji_normal = []
+omikuji_normal = [0]
 normalwari = 3
 vipwari = 9
 
@@ -98,15 +98,15 @@ async def on_message(message):
         embed.add_field(name="---------------------", value="---------------------")
         embed.add_field(name="Vip特典(おみくじ確率UP)", value=f"`{vipwari}`倍")
         await message.channel.send(embed=embed)
-        embed = discord.Embed(title="**おみくじNormal**", description="---------------------",color=0x2ECC69)
+        embeds = discord.Embed(title="**おみくじNormal**", description="---------------------",color=0x2ECC69)
         ncounts = 0
         for n in omikuji_normal:
             ncounts += 1
             user = client.get_user(n)
-            embed.add_field(name=f"{ncounts}人目", value=f"`{user}`")
-        embed.add_field(name="---------------------", value="---------------------")
-        embed.add_field(name="Normal特典(おみくじ確率UP)", value=f"`{normalwari}`倍")
-        await message.channel.send(embed=embed)
+            embeds.add_field(name=f"{ncounts}人目", value=f"`{user}`")
+        embeds.add_field(name="---------------------", value="---------------------")
+        embeds.add_field(name="Normal特典(おみくじ確率UP)", value=f"`{normalwari}`倍")
+        await message.channel.send(embed=embeds)
 
 #おみくじ
     if message.content == "おみくじ":
@@ -147,9 +147,9 @@ async def on_message(message):
             else:
                 omokuji = "大凶"    
             embed.add_field(name="[運勢] ", value=omokuji, inline=False)
-            if omokuji = "超大吉！！おみくじvip獲得！！"
+            if omokuji = "超大吉！！おみくじvip獲得！！":
                 embed.add_field(name="おめでとう🎉", value="<@&613342519438344193>に当たった事を伝えてください。", inline=False)
-            if omokuji = "大凶" or omokuji = "大吉"
+            if omokuji = "大凶" or omokuji = "大吉":
                 embed.add_field(name="Normal特典獲得！！", value="<@&613342519438344193>に当たった事を伝えてください。", inline=False)
             await message.channel.send(embed=embed)
             #client.get_channel(CHANNEL_ID3)
