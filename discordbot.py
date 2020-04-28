@@ -36,6 +36,7 @@ ssr_tuti = 636400089396543526
 ssr_ch = 638239968140984330
 
 omikuji_vip = [459936557432963103,0]
+vipwari = 2
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -85,6 +86,14 @@ async def on_message(message):
     """メッセージを処理"""
     if message.author.id == my_bot_id:
         return
+    if message.content == "おみくじviper":
+        for v in omikuji_vip:
+            embed = discord.Embed(title="おみくじVIPER", description=None,color=0x2ECC69)
+            user = client.get_user(v)
+            embed.add_field(name=f"`{user.name}`", value="--------------")
+        embed.add_field(name="Vip特典(おみくじ確率UP)", value=f"`{vipwari}`倍")
+        await message.channel.send(embed=embed)
+
 #おみくじ
     if message.content == "おみくじ":
         if message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
@@ -95,7 +104,6 @@ async def on_message(message):
             prob = random.random()
             print(prob)
             if message.author.id in omikuji_vip: 
-                vipwari = 2
                 prob = prob/vipwari
             print(prob)
             if prob < 0.01:
