@@ -98,7 +98,7 @@ async def on_message(message):
         embed.add_field(name="---------------------", value="---------------------")
         embed.add_field(name="Vip特典(おみくじ確率UP)", value=f"`{vipwari}`倍")
         await message.channel.send(embed=embed)
-        embed = discord.Embed(title="**おみくじVIPER**", description="---------------------",color=0x2ECC69)
+        embed = discord.Embed(title="**おみくじNormal**", description="---------------------",color=0x2ECC69)
         ncounts = 0
         for n in omikuji_normal:
             ncounts += 1
