@@ -90,7 +90,7 @@ async def on_message(message):
         for v in omikuji_vip:
             embed = discord.Embed(title="おみくじVIPER", description=None,color=0x2ECC69)
             user = client.get_user(v)
-            embed.add_field(name=f"`{user.name}`", value="--------------")
+            embed.add_field(name=f"`{user.name}`", value="----------------------------")
         embed.add_field(name="Vip特典(おみくじ確率UP)", value=f"`{vipwari}`倍")
         await message.channel.send(embed=embed)
 
