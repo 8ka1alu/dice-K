@@ -134,6 +134,9 @@ async def on_message(message):
             else:
                 omokuji = "大凶"    
             embed.add_field(name="[運勢] ", value=omokuji, inline=False)
+            if prob < 0.005:
+                owner = client.get_user(great_owner_id)
+                embed.add_field(name="おめでとう🎉", value="<@&613342519438344193>に当たった事を伝えてください。", inline=False)
             await message.channel.send(embed=embed)
             #client.get_channel(CHANNEL_ID3)
         
