@@ -88,10 +88,12 @@ async def on_message(message):
         return
     if message.content == "おみくじviper":
         embed = discord.Embed(title="おみくじVIPER", description=None,color=0x2ECC69)
+        counts = 0
         for v in omikuji_vip:
+            counts += 1
             user = client.get_user(v)
-            embed.add_field(name=f"`{user}`", value="` `")
-        embed.add_field(name="----------------------------", value="` `")
+            embed.add_field(name=f"{counts}人目", value=f"`{user}`")
+        embed.add_field(name="---------------------", value="---------------------")
         embed.add_field(name="Vip特典(おみくじ確率UP)", value=f"`{vipwari}`倍")
         await message.channel.send(embed=embed)
 
