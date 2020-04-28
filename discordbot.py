@@ -109,7 +109,9 @@ async def on_message(message):
             if message.author.id in omikuji_vip: 
                 prob = prob/vipwari
             print(prob)
-            if prob < 0.01:
+            if prob < 0.005:
+                omokuji = "超大吉！！おみくじvip獲得！！"
+            elif prob < 0.01:
                 omokuji = "大吉"
             elif prob < 0.1:
                 omokuji = "中吉"
