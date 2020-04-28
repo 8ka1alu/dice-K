@@ -36,7 +36,9 @@ ssr_tuti = 636400089396543526
 ssr_ch = 638239968140984330
 
 omikuji_vip = [459936557432963103,436078064292855818,493343156864155668]
-vipwari = 2
+omikuji_normal = []
+normalwari = 3
+vipwari = 9
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -86,7 +88,7 @@ async def on_message(message):
     """メッセージを処理"""
     if message.author.id == my_bot_id:
         return
-    if message.content == "おみくじviper":
+    if message.content == "おみくじ特典":
         embed = discord.Embed(title="**おみくじVIPER**", description="---------------------",color=0x2ECC69)
         counts = 0
         for v in omikuji_vip:
@@ -95,6 +97,15 @@ async def on_message(message):
             embed.add_field(name=f"{counts}人目", value=f"`{user}`")
         embed.add_field(name="---------------------", value="---------------------")
         embed.add_field(name="Vip特典(おみくじ確率UP)", value=f"`{vipwari}`倍")
+        await message.channel.send(embed=embed)
+        embed = discord.Embed(title="**おみくじVIPER**", description="---------------------",color=0x2ECC69)
+        ncounts = 0
+        for n in omikuji_normal:
+            ncounts += 1
+            user = client.get_user(n)
+            embed.add_field(name=f"{ncounts}人目", value=f"`{user}`")
+        embed.add_field(name="---------------------", value="---------------------")
+        embed.add_field(name="Normal特典(おみくじ確率UP)", value=f"`{normalwari}`倍")
         await message.channel.send(embed=embed)
 
 #おみくじ
@@ -108,6 +119,8 @@ async def on_message(message):
             print(prob)
             if message.author.id in omikuji_vip: 
                 prob = prob/vipwari
+            if message.author.id in omikuji_normal:
+                prob = prob/normalwari
             print(prob)
             if prob < 0.005:
                 omokuji = "超大吉！！おみくじvip獲得！！"
@@ -134,9 +147,10 @@ async def on_message(message):
             else:
                 omokuji = "大凶"    
             embed.add_field(name="[運勢] ", value=omokuji, inline=False)
-            if prob < 0.005:
-                owner = client.get_user(great_owner_id)
+            if omokuji = "超大吉！！おみくじvip獲得！！"
                 embed.add_field(name="おめでとう🎉", value="<@&613342519438344193>に当たった事を伝えてください。", inline=False)
+            if omokuji = "大凶" or omokuji = "大吉"
+                embed.add_field(name="Normal特典獲得！！", value="<@&613342519438344193>に当たった事を伝えてください。", inline=False)
             await message.channel.send(embed=embed)
             #client.get_channel(CHANNEL_ID3)
         
