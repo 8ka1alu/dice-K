@@ -35,7 +35,7 @@ discord_py_ver = '3.7.3'
 ssr_tuti = 636400089396543526
 ssr_ch = 638239968140984330
 
-omikuji_vip = [459936557432963103,0]
+omikuji_vip = [459936557432963103]
 vipwari = 2
 
 # 接続に必要なオブジェクトを生成
@@ -90,10 +90,8 @@ async def on_message(message):
         embed = discord.Embed(title="おみくじVIPER", description=None,color=0x2ECC69)
         for v in omikuji_vip:
             user = client.get_user(v)
-            if v == None:
-                pass
-            else:
-                embed.add_field(name=f"`{user}`", value="----------------------------")
+            embed.add_field(name=f"`{user}`", value=" ")
+        embed.add_field(name="----------------------------", value=" ")
         embed.add_field(name="Vip特典(おみくじ確率UP)", value=f"`{vipwari}`倍")
         await message.channel.send(embed=embed)
 
