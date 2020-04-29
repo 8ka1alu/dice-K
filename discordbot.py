@@ -36,7 +36,7 @@ ssr_tuti = 636400089396543526
 ssr_ch = 638239968140984330
 
 omikuji_vip = [459936557432963103,436078064292855818,493343156864155668]
-omikuji_normal = [475909877018132500]
+omikuji_normal = [475909877018132500,459936557432963103]
 normalwari = 3
 vipwari = 9
 
@@ -111,17 +111,20 @@ async def on_message(message):
 #おみくじ
     if message.content == "おみくじ":
         if message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
+            porb1 = 1
             # Embedを使ったメッセージ送信 と ランダムで要素を選択
             embed = discord.Embed(title="おみくじ", description=f"{message.author.mention}さんの今日の運勢は！",
                                   color=0x2ECC69)
             embed.set_thumbnail(url=message.author.avatar_url)
             prob = random.random()
-            print(prob)
+            porb2 = prob
             if message.author.id in omikuji_vip: 
                 prob = prob/vipwari
+                porb1 = porb1 * vipwari
             if message.author.id in omikuji_normal:
                 prob = prob/normalwari
-            print(prob)
+                porb1 = porb1 * normalwari
+            porb3 = prob
             if prob < 0.005:
                 omokuji = "超大吉！！おみくじvip獲得！！"
             elif prob < 0.01:
@@ -152,8 +155,14 @@ async def on_message(message):
             if omokuji == "大凶" or omokuji == "大吉":
                 embed.add_field(name="Normal特典獲得！！", value="<@&613342519438344193>に当たった事を伝えてください。", inline=False)
             await message.channel.send(embed=embed)
-            #client.get_channel(CHANNEL_ID3)
-        
+            log_chs = client.get_channel(704956933223743538)
+            embed = discord.Embed(title="**おみくじ確率表**", description=f"実行者:`{message.author.name}`",
+                                  color=0x2ECC69)
+            embed.set_thumbnail(url=message.author.avatar_url)
+            embed.add_field(name="**確率**", value=f"`{porb1}倍`", inline=False)
+            embed.add_field(name="**[元値]⇨[処理値]**", value=f"`[{porb2}]`⇨`[{porb3}]`", inline=False)
+            await log_chs.send(embed=embed)
+
     if message.content == 'ヘルプ':
         page_count = 0 #ヘルプの現在表示しているページ数
         page_content_list = [">>> **リリナコマンド一覧(ページ1)**\n\n**何時？**：今の時間を教えてくれます！(何時何分何秒)\n**何日？**：何日か教えてくれます！(何月何日)\n\n➡絵文字を押すと次のページへ",
