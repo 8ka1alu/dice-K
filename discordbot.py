@@ -1,6 +1,6 @@
 import discord 
 import os
-from discord.ext import tasks
+from discord.ext import tasks,commands
 from datetime import timedelta
 import datetime
 import random
@@ -39,6 +39,58 @@ omikuji_vip = [459936557432963103,436078064292855818,493343156864155668]
 omikuji_normal = [475909877018132500,459936557432963103]
 normalwari = 3
 vipwari = 9
+
+if not discord.opus.is_loaded():
+    discord.opus.load_opus("heroku-buildpack-libopus")
+bot = commands.Bot(command_prefix="$")
+
+@bot.command(aliases=["connect","summon"]) #connectやsummonでも呼び出せる
+async def join(ctx):
+    """Botをボイスチャンネルに入室させます。"""
+    voice_state = ctx.author.voice
+
+    if (not voice_state) or (not voice_state.channel):
+        await ctx.send("先にボイスチャンネルに入っている必要があります。")
+        return
+
+    channel = voice_state.channel
+
+    await channel.connect()
+    print("connected to:",channel.name)
+
+
+@bot.command(aliases=["disconnect","bye"])
+async def leave(ctx):
+    """Botをボイスチャンネルから切断します。"""
+    voice_client = ctx.message.guild.voice_client
+
+    if not voice_client:
+        await ctx.send("Botはこのサーバーのボイスチャンネルに参加していません。")
+        return
+
+    await voice_client.disconnect()
+    await ctx.send("ボイスチャンネルから切断しました。")
+
+
+@bot.command()
+async def play(ctx):
+    """指定された音声ファイルを流します。"""
+    voice_client = ctx.message.guild.voice_client
+
+    if not voice_client:
+        await ctx.send("Botはこのサーバーのボイスチャンネルに参加していません。")
+        return
+
+    if not ctx.message.attachments:
+        await ctx.send("ファイルが添付されていません。")
+        return
+
+    await ctx.message.attachments[0].save("tmp.mp3")
+
+    ffmpeg_audio_source = discord.FFmpegPCMAudio("tmp.mp3")
+    voice_client.play(ffmpeg_audio_source)
+
+    await ctx.send("再生しました。")
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -670,6 +722,6 @@ async def loop():
 loop.start()
 
 client.run(TOKEN)
-
+bot.run(TOKEN)
 #リリナ
 #ver 6.0.1
