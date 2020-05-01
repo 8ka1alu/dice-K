@@ -87,8 +87,10 @@ async def on_voice_state_update(member, before, after):
 @client.event
 async def on_message(message):
     global selfmode
+
     if message.author.id == my_bot_id:
         return
+
     if message.content == "点検モード":
         if message.author.id != great_owner_id:
             return
@@ -98,10 +100,12 @@ async def on_message(message):
         elif selfmode == 1:
             selfmode = 0
             await message.channel.send(f"モード変更しました。\n現在：`{selfmode}`")
+
     if selfmode == 1: 
         if message.author.id != great_owner_id:
             await message.channel.send("⚠️現在調整中です⚠️")
             return
+
     if message.content == "おみくじ特典":
         embed = discord.Embed(title="**おみくじVIPER**", description="---------------------",color=0x2ECC69)
         counts = 0
@@ -141,7 +145,7 @@ async def on_message(message):
                     prob = prob/normalwari
                     porb1 = porb1 * normalwari
             else:
-                randamwari1 = random.choice(('1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9','2.0'))
+                randamwari1 = random.choice((1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0))
                 randamwari = str(randamwari1)
                 prob = prob/randamwari
                 porb1 = porb1 * randamwari
