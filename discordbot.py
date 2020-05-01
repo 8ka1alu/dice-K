@@ -120,13 +120,13 @@ async def on_message(message):
             porb2 = prob
             if message.author.id in omikuji_vip: 
                 if message.content.startswith == "t":
-                    pass
+                    continue
                 else:
                     prob = prob/vipwari
                     porb1 = porb1 * vipwari
             if message.author.id in omikuji_normal:
                 if message.content.startswith == "t":
-                    pass
+                    continue
                 else:
                     prob = prob/normalwari
                     porb1 = porb1 * normalwari
