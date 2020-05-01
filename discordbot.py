@@ -87,7 +87,11 @@ async def on_voice_state_update(member, before, after):
 @client.event
 async def on_message(message):
     global selfmode
+    if message.author.id == my_bot_id:
+        return
     if message.content == "点検モード":
+        if message.author.id != great_owner_id:
+            return
         if selfmode == 0:
             selfmode = 1
             await message.channel.send(f"モード変更しました。\n現在：`{selfmode}`")
@@ -98,8 +102,6 @@ async def on_message(message):
         if message.author.id != great_owner_id:
             await message.channel.send("⚠️現在調整中です⚠️")
             return
-    if message.author.id == my_bot_id:
-        return
     if message.content == "おみくじ特典":
         embed = discord.Embed(title="**おみくじVIPER**", description="---------------------",color=0x2ECC69)
         counts = 0
