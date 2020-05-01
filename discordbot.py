@@ -40,6 +40,7 @@ omikuji_normal = [475909877018132500,459936557432963103]
 normalwari = 3
 vipwari = 9
 
+selfmode = 0
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
 
@@ -85,7 +86,18 @@ async def on_voice_state_update(member, before, after):
 
 @client.event
 async def on_message(message):
-    """メッセージを処理"""
+    global selfmode
+    if message.content == "点検モード":
+        if selfmode == 0:
+            selfmode = 1
+            await message.channel.send(f"モード変更しました。\n現在：`{selfmode}`")
+        elif selfmode == 1:
+            selfmode = 0
+            await message.channel.send(f"モード変更しました。\n現在：`{selfmode}`")
+    if selfmode == 1: 
+        if message.author.id != great_owner_id:
+            await message.channel.send("⚠️現在調整中です⚠️")
+            return
     if message.author.id == my_bot_id:
         return
     if message.content == "おみくじ特典":
@@ -132,7 +144,7 @@ async def on_message(message):
                 prob = prob/randamwari
                 porb1 = porb1 * randamwari
             if message.content.startswith("t"):
-                randamwari2 = random.choice(('1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9','2.0'))
+                randamwari2 = random.choice((1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0))
                 randamwari = str(randamwari2)
                 prob = prob/randamwari
                 porb1 = porb1 * randamwari
