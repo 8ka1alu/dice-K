@@ -109,7 +109,7 @@ async def on_message(message):
         await message.channel.send(embed=embeds)
 
 #おみくじ
-    if message.content == "おみくじ":
+    if message.content == "おみくじ" or message.content == "tおみくじ":
         if message.channel.id == CHANNEL_ID3 or CHANNEL_IDother:
             porb1 = 1
             # Embedを使ったメッセージ送信 と ランダムで要素を選択
@@ -119,11 +119,21 @@ async def on_message(message):
             prob = random.random()
             porb2 = prob
             if message.author.id in omikuji_vip: 
-                prob = prob/vipwari
-                porb1 = porb1 * vipwari
+                if message.content.startswith == "t":
+                    pass
+                else:
+                    prob = prob/vipwari
+                    porb1 = porb1 * vipwari
             if message.author.id in omikuji_normal:
-                prob = prob/normalwari
-                porb1 = porb1 * normalwari
+                if message.content.startswith == "t":
+                    pass
+                else:
+                    prob = prob/normalwari
+                    porb1 = porb1 * normalwari
+            if not message.author.id in omikuji_normal or not message.author.id in omikuji_normal or message.content.startswith == "t":
+                randamwari = random.choice('1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9','2.0')
+                prob = prob/randamwari
+                porb1 = porb1 * randamwari
             porb3 = prob
             if prob < 0.005:
                 omokuji = "超大吉！！おみくじvip獲得！！"
