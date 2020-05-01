@@ -119,18 +119,18 @@ async def on_message(message):
             prob = random.random()
             porb2 = prob
             if message.author.id in omikuji_vip: 
-                if message.content.startswith == "お":
+                if message.content.startswith("お"):
                     prob = prob/vipwari
                     porb1 = porb1 * vipwari
             if message.author.id in omikuji_normal:
-                if message.content.startswith == "お":
+                if message.content.startswith("お"):
                     prob = prob/normalwari
                     porb1 = porb1 * normalwari
             else:
                 randamwari = random.choice(('1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9','2.0'))
                 prob = prob/randamwari
                 porb1 = porb1 * randamwari
-            if message.content.startswith == "t":
+            if message.content.startswith("t"):
                 randamwari = random.choice(('1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9','2.0'))
                 prob = prob/randamwari
                 porb1 = porb1 * randamwari
