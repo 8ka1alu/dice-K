@@ -119,11 +119,11 @@ async def on_message(message):
             prob = random.random()
             porb2 = prob
             if message.author.id in omikuji_vip: 
-                if not message.content.startswith == "t":
+                if message.content.startswith == "お":
                     prob = prob/vipwari
                     porb1 = porb1 * vipwari
             if message.author.id in omikuji_normal:
-                if not message.content.startswith == "t":
+                if message.content.startswith == "お":
                     prob = prob/normalwari
                     porb1 = porb1 * normalwari
             else:
