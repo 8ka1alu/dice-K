@@ -58,7 +58,7 @@ async def on_ready():
     await channel.send(f'Discord ver:{discord.__version__}')  # discord.pyのバージョン
     await channel.send('----------------')
     await channel.send('状態：BOT再起動しました。')   
-    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name=f'ギルド専属ナビ|Ping:{client.ws.latency * 1000:.0f}ms'))
+    await client.change_presence(status=discord.Status.idle,activity=discord.Game(name=f'ギルド専属ナビ|Ping:{client.ws.latency * 1000:.0f}ms',url='https://discord.com/new'))
     
 @client.event
 async def on_voice_state_update(member, before, after):
